@@ -1,4 +1,5 @@
-import { getAllUsers } from "@/lib/prisma/query/user";
+import { createUser, getAllUsers } from "@/lib/prisma";
+import { UserSchema } from "@/shared/types";
 import { ErrorHandler } from "@/utils";
 import type { NextApiRequest, NextApiResponse } from "next";
 
@@ -16,7 +17,7 @@ const allowedMethods = ["GET", "POST"];
 
 export default async function handler(
   req: NextApiRequest,
-  res: NextApiResponse<Data[]>
+  res: NextApiResponse<Partial<Data[] | Data>>
 ) {
   try {
     if (!allowedMethods.includes(req.method!) || req.method == "OPTIONS") {
@@ -26,7 +27,15 @@ export default async function handler(
     if (req.method === "GET") {
       const users = await getAllUsers();
 
-      return res.status(200).json(users);
+      return res.status(200).json(users && []);
+    }
+
+    if (req.method === "POST") {
+      const userValidation = UserSchema.parse(req.body);
+
+      const userCreated = await createUser(userValidation);
+
+      return res.status(201).json(userCreated);
     }
   } catch (err) {
     ErrorHandler.handle(res, err);
