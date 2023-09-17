@@ -10,7 +10,7 @@ type Data = {
   email: string;
   created_at: Date;
   updated_at: Date;
-  deleted_at: Date | null;
+  deleted_at: Date | null;  
 };
 
 const allowedMethods = ["GET", "POST"];

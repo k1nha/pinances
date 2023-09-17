@@ -23,21 +23,22 @@ model User {
   Finances        Finances[]
 }
 
-model TransactionType {
-  id         String    @id @default(auto()) @map("_id") @db.ObjectId
-  name_type  String
-  created_at DateTime  @default(now()) @db.Timestamp
-  updated_at DateTime  @updatedAt @db.Timestamp
-  deleted_at DateTime? @db.Timestamp
-  user_id    String    @db.ObjectId
-
-  User     User       @relation(fields: [user_id], references: [id])
-  Finances Finances[]
-}
-
 enum FinanceSource {
   ENTRADA
   SAIDA
+}
+
+model TransactionType {
+  id           String        @id @default(auto()) @map("_id") @db.ObjectId
+  name_type    String
+  created_at   DateTime      @default(now()) @db.Timestamp
+  updated_at   DateTime      @updatedAt @db.Timestamp
+  deleted_at   DateTime?     @db.Timestamp
+  user_id      String        @db.ObjectId
+  finance_type FinanceSource
+
+  User     User       @relation(fields: [user_id], references: [id])
+  Finances Finances[]
 }
 
 model Finances {
@@ -50,7 +51,7 @@ model Finances {
   created_at       DateTime      @default(now()) @db.Timestamp
   updated_at       DateTime      @updatedAt @db.Timestamp
   deleted_at       DateTime?     @db.Timestamp
-  finance_type     FinanceSource
+  // finance_type     FinanceSource
 
   transactionType TransactionType @relation(fields: [transaction_type], references: [id])
   userId          User            @relation(fields: [user_id], references: [id])

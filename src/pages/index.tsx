@@ -1,11 +1,9 @@
 import { Login } from "@/modules/user";
-import Head from "next/head";
 import Link from "next/link";
 
 export default function Home() {
   return (
     <>
- 
       <main className={"min-h-screen w-full flex"}>
         <section
           className={

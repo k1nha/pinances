@@ -1,4 +1,4 @@
-import { SideBar } from "@/components";
+import { Navbar, SideBar } from "@/components";
 
 export function UserLayout({ children }: { children?: React.ReactNode }) {
   return (
@@ -6,6 +6,7 @@ export function UserLayout({ children }: { children?: React.ReactNode }) {
       <SideBar />
 
       {children}
+      <Navbar />
     </main>
   );
 }

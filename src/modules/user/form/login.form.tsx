@@ -33,7 +33,7 @@ export function LoginForm({
         <label className={"text-sm text-zinc-600 mb-1"}>Email</label>
         <Input type={"email"} {...getFieldProps("email")} disabled={disabled} />
         {errors.email && touched.email && (
-          <p className={"text-xs text-red-400 text-end"}>Email inválido</p>
+          <p className={"text-xs text-red-400 text-end"}>{errors.email}</p>
         )}
       </div>
 
@@ -45,7 +45,7 @@ export function LoginForm({
           disabled={disabled}
         />
         {errors.password && touched.password && (
-          <p className={"text-xs text-red-400 text-end"}>Senha é obrigatória</p>
+          <p className={"text-xs text-red-400 text-end"}>{errors.password}</p>
         )}
       </div>
     </form>
