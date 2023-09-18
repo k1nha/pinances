@@ -1,5 +1,7 @@
-import { Card } from "@/components/ui";
+import { DataTable, transactionsColumns } from "@/modules/user";
 import { UserLayout } from "@/shared/layouts";
+
+
 
 export default function Transaction() {
   return (
@@ -9,7 +11,10 @@ export default function Transaction() {
         <div>
           <h1 className={"text-2xl font-semibold"}>Transações</h1>
         </div>
+
+        
       </section>
     </UserLayout>
   );
 }
+

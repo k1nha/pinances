@@ -1,9 +1,21 @@
 import { TypeTransaction } from "@/components/transactions";
 import { Card } from "@/components/ui";
-import { Type } from "@/modules/user";
+import { DataTable, Type, transactionsColumns } from "@/modules/user";
 import { UserLayout } from "@/shared/layouts";
 
-export default function Types() {
+type Props = {
+  data: {
+    id: string;
+    name_type: string;
+    finance_type: string;
+    created_at: Date;
+    updated_at: Date;
+    deleted_at: Date | null;
+    user_id: string;
+  }[];
+};
+
+export default function Types({ data }: Props) {
   return (
     <UserLayout>
       <section
@@ -34,7 +46,15 @@ export default function Types() {
           </Card>
         </div>
 
-        <div className="flex items-center justify-center md:mb-0 mb-16">
+        <div className="grid grid-cols-1  md:grid-cols-2 gap-4  md:mb-0 mb-16">
+          <Card className="p-6">
+            <div className="mb-2">
+              <h1 className={"font-semibold"}>Categorias</h1>
+              <p className={"text-sm text-slate-500"}>Todas suas saídas</p>
+            </div>
+            <DataTable columns={transactionsColumns} data={data} />
+          </Card>
+
           <Card className={"p-6"}>
             <div className="">
               <h1 className={"font-semibold"}>Adicionar novos tipos</h1>
@@ -49,4 +69,17 @@ export default function Types() {
       </section>
     </UserLayout>
   );
+}
+
+export async function getServerSideProps() {
+  const res = await fetch(
+    "http://localhost:3000/api/v1/transactiontype/650770784dfe37a6c7d8d01f"
+  );
+  const data = await res.json();
+
+  return {
+    props: {
+      data,
+    },
+  };
 }

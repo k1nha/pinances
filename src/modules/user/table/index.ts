@@ -1,2 +1,2 @@
-export * from "./user";
 export * from "./transactiontype";
+export * from "./data.table";
