@@ -1,7 +1,5 @@
-import { DataTable, transactionsColumns } from "@/modules/user";
+import { TransactionModule } from "@/modules/user";
 import { UserLayout } from "@/shared/layouts";
-
-
 
 export default function Transaction() {
   return (
@@ -12,9 +10,8 @@ export default function Transaction() {
           <h1 className={"text-2xl font-semibold"}>Transações</h1>
         </div>
 
-        
+        <TransactionModule />
       </section>
     </UserLayout>
   );
 }
-

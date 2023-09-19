@@ -2,6 +2,7 @@ import { TypeTransaction } from "@/components/transactions";
 import { Card } from "@/components/ui";
 import { DataTable, Type, transactionsColumns } from "@/modules/user";
 import { UserLayout } from "@/shared/layouts";
+import { GetServerSideProps } from "next";
 
 type Props = {
   data: {
@@ -50,7 +51,9 @@ export default function Types({ data }: Props) {
           <Card className="p-6">
             <div className="mb-2">
               <h1 className={"font-semibold"}>Categorias</h1>
-              <p className={"text-sm text-slate-500"}>Todas suas saídas</p>
+              <p className={"text-sm text-slate-500"}>
+                Tabela com as categorias
+              </p>
             </div>
             <DataTable columns={transactionsColumns} data={data} />
           </Card>
@@ -71,7 +74,7 @@ export default function Types({ data }: Props) {
   );
 }
 
-export async function getServerSideProps() {
+export const getServerSideProps: GetServerSideProps = async () => {
   const res = await fetch(
     "http://localhost:3000/api/v1/transactiontype/650770784dfe37a6c7d8d01f"
   );
@@ -82,4 +85,4 @@ export async function getServerSideProps() {
       data,
     },
   };
-}
+};

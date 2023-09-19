@@ -28,3 +28,21 @@ export function getAllTransactionsType(id: string) {
     },
   });
 }
+
+export function getAllInputTransaction(id: string) {
+  return prisma.transactionType.findMany({
+    where: {
+      user_id: id,
+      finance_type: "ENTRADA",
+    },
+  });
+}
+
+export function getAllOutputTransaction(id: string) {
+  return prisma.transactionType.findMany({
+    where: {
+      user_id: id,
+      finance_type: "SAIDA",
+    },
+  });
+}

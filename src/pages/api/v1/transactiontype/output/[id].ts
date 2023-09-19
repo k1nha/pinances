@@ -1,4 +1,4 @@
-import { getAllTransactionsType } from "@/lib/prisma";
+import { getAllOutputTransaction } from "@/lib/prisma";
 import { ErrorHandler } from "@/utils";
 import { NextApiRequest, NextApiResponse } from "next";
 import { z } from "zod";
@@ -17,7 +17,7 @@ export default async function handler(
     if (req.method == "GET") {
       const id = z.string().parse(req.query.id);
 
-      const transactionType = await getAllTransactionsType(id);
+      const transactionType = await getAllOutputTransaction(id);
 
       return res.status(200).json(transactionType);
     }
