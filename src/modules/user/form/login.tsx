@@ -3,6 +3,7 @@ import { Button } from "@/components/ui";
 import { LoginForm, User } from ".";
 import * as yup from "yup";
 import { useRouter } from "next/router";
+import { signIn } from "next-auth/react";
 
 const loginSchema = yup.object({
   email: yup.string().email().required(),
@@ -12,9 +13,19 @@ const loginSchema = yup.object({
 export function Login() {
   const router = useRouter();
 
-  function handleLogin(data: User) {    
-    router.push("/dashboard");
-    return;
+  async function handleLogin(data: User) {
+    const result = await signIn("credentials", {
+      email: data.email,
+      password: data.password,
+      redirect: false,
+    });
+
+    if (result?.error) {
+      console.log(result);
+      return;
+    }
+    // router.replace("/dashboard");
+    // return;
   }
 
   return (

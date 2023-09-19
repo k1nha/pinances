@@ -23,8 +23,14 @@ export async function createUser(user: User) {
     throw new Error("User already exists");
   }
 
+  // const passwordHash =
+
   const userCreated = await prisma.user.create({
-    data: user,
+    data: {
+      email: user.email,
+      name: user.name,
+      password: user.password,
+    },
   });
 
   return userCreated;
