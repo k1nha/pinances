@@ -1,12 +1,9 @@
 import { routes } from "@/shared/constants";
 import { LogoIcon } from "@/shared/icons";
 import Link from "next/link";
-import { useRouter } from "next/router";
 import { Avatar, AvatarFallback, AvatarImage, Separator } from "../ui";
 
 export function SideBar() {
-  const router = useRouter();
-
   return (
     <aside
       className={
@@ -47,11 +44,7 @@ export function SideBar() {
               }>
               Lucas Campos
             </Link>
-            <button
-              className={"text-xs text-end"}
-              onClick={() => router.push("/")}>
-              sair
-            </button>
+            <button className={"text-xs text-end"}>sair</button>
           </div>
         </div>
       </div>

@@ -1,0 +1,90 @@
+{
+    "operationName": "Companies",
+    "variables": {
+        "filter": {
+            "segments": [
+                "DELIVERY_RIOGALEAO"
+            ]
+        }
+    },
+    "query": "query Companies($filter: CompaniesFilter!) {
+      companies(filter: $filter) {
+        _id 
+        name
+        slug
+        logo
+        address {
+          city
+          district
+          __typename
+        }
+        openingHours {
+          _id
+          sunday {
+            open
+            hours {
+              start
+              end
+              __typename
+            }
+            __typename
+          }
+          monday {
+            open
+            hours {
+              start
+              end
+              __typename
+            }
+            __typename
+          }
+          tuesday {
+            open
+            hours {
+              start
+              end
+              __typename
+            }
+            __typename
+          }
+          wednesday {
+            open
+            hours {
+              start
+              end
+              __typename
+            }
+            __typename
+          }
+          thursday {
+            open
+            hours {
+              start
+              end
+              __typename
+            }
+            __typename
+          }
+          friday {
+            open
+            hours {
+              start
+              end
+              __typename
+            }
+            __typename
+          }
+          saturday {
+            open
+            hours {
+              start
+              end
+              __typename
+            }
+            __typename
+          }
+          __typename
+        }
+        __typename
+      }
+    }"

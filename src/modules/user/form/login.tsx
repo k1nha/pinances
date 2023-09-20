@@ -2,7 +2,7 @@
 import { Button } from "@/components/ui";
 import { LoginForm, User } from ".";
 import * as yup from "yup";
-import { useRouter } from "next/router";
+import { useRouter } from "next/navigation";
 import { signIn } from "next-auth/react";
 
 const loginSchema = yup.object({
@@ -11,7 +11,7 @@ const loginSchema = yup.object({
 });
 
 export function Login() {
-  const router = useRouter();
+  const { replace } = useRouter();
 
   async function handleLogin(data: User) {
     const result = await signIn("credentials", {
@@ -24,8 +24,9 @@ export function Login() {
       console.log(result);
       return;
     }
-    // router.replace("/dashboard");
-    // return;
+
+    replace("/dashboard");
+    return;
   }
 
   return (

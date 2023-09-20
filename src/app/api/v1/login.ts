@@ -1,33 +1,30 @@
-import { createUser, getAllUsers } from "@/lib/prisma";
-import { UserSchema } from "@/shared/types";
+import { auth } from "@/lib/prisma";
 import { ErrorHandler } from "@/utils";
 import type { NextApiRequest, NextApiResponse } from "next";
 
 type Data = {
-  id: string;
-  name: string;
-  password: string;
-  email: string;
-  created_at: Date;
-  updated_at: Date;
-  deleted_at: Date | null;
+  user_id: string;
+  user_name: string;
+  token: string;
+  user_email: string;
 };
 
 const allowedMethods = ["GET", "POST"];
 
 export default async function handler(
   req: NextApiRequest,
-  res: NextApiResponse<Partial<Data[] | Data>>
+  res: NextApiResponse<Data>
 ) {
   try {
     if (!allowedMethods.includes(req.method!) || req.method == "OPTIONS") {
       return ErrorHandler.handle(res, new Error("Method not allowed"));
     }
 
-    if (req.method === "GET") {
-      const users = await getAllUsers();
+    if (req.method === "POST") {
+      const { email, password } = req.body;
+      const users = await auth({ email, password });
 
-      return res.status(200).json(users && []);
+      return res.status(200).json(users);
     }
   } catch (err) {
     ErrorHandler.handle(res, err);

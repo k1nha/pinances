@@ -1,5 +1,5 @@
+"use client"
 import { Login } from "@/modules/user";
-import Link from "next/link";
 
 export default function Home() {
   return (
@@ -9,7 +9,7 @@ export default function Home() {
           className={
             "w-1/2 p-10 bg-black text-white hidden lg:flex flex-col justify-between"
           }>
-          <Link href={"/"} className="flex gap-2 items-center">
+          <div className="flex gap-2 items-center">
             <svg
               xmlns="http://www.w3.org/2000/svg"
               width="26"
@@ -19,7 +19,7 @@ export default function Home() {
               <path d="M216,96H176V56a8,8,0,0,0-8-8H48V40a8,8,0,0,0-16,0V216a8,8,0,0,0,16,0v-8h88a8,8,0,0,0,8-8V160h72a8,8,0,0,0,8-8V104A8,8,0,0,0,216,96ZM160,64V96H48V64ZM128,192H48V160h80Zm80-48H48V112H208Z"></path>
             </svg>
             <h1 className={"font-semibold"}>Pinances</h1>
-          </Link>
+          </div>
 
           <article>
             <p className={"text-lg font-thin"}>
@@ -34,9 +34,7 @@ export default function Home() {
           className={
             "w-full lg:w-1/2 bg-white flex gap-2 flex-col items-center justify-center text-black"
           }>
-          <Link
-            href={"/"}
-            className="flex lg:hidden gap-2 items-center absolute top-10 left-7">
+          <div className="flex lg:hidden gap-2 items-center absolute top-10 left-7">
             <svg
               xmlns="http://www.w3.org/2000/svg"
               width="26"
@@ -46,7 +44,7 @@ export default function Home() {
               <path d="M216,96H176V56a8,8,0,0,0-8-8H48V40a8,8,0,0,0-16,0V216a8,8,0,0,0,16,0v-8h88a8,8,0,0,0,8-8V160h72a8,8,0,0,0,8-8V104A8,8,0,0,0,216,96ZM160,64V96H48V64ZM128,192H48V160h80Zm80-48H48V112H208Z"></path>
             </svg>
             <h1 className={"font-semibold"}>Pinances</h1>
-          </Link>
+          </div>
 
           <h2 className={"text-3xl font-semibold"}>Login</h2>
           <p className={"text-center text-sm text-gray-500"}>

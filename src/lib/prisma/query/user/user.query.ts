@@ -1,5 +1,6 @@
 import { User } from "@/shared/types";
 import { prisma } from "../../prisma.client";
+import { hash } from "bcrypt";
 
 export function getAllUsers() {
   return prisma.user.findMany({
@@ -23,13 +24,13 @@ export async function createUser(user: User) {
     throw new Error("User already exists");
   }
 
-  // const passwordHash =
+  const passwordHash = await hash(user.password, 10);
 
   const userCreated = await prisma.user.create({
     data: {
       email: user.email,
       name: user.name,
-      password: user.password,
+      password: passwordHash,
     },
   });
 
