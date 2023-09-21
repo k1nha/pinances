@@ -37,7 +37,7 @@ export function TransactionModule() {
         typesDATA={data}
       />
 
-      <Button type={"submit"} id={"form-transaction"}>
+      <Button type={"submit"} id={"form-transaction"} className={"mt-4"}>
         Enviar
       </Button>
     </>

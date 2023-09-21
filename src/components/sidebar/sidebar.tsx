@@ -1,9 +1,16 @@
+import { authOptions } from "@/app/api/auth/[...nextauth]/route";
 import { routes } from "@/shared/constants";
 import { LogoIcon } from "@/shared/icons";
+import { getServerSession } from "next-auth";
 import Link from "next/link";
 import { Avatar, AvatarFallback, AvatarImage, Separator } from "../ui";
+import { signOut } from "next-auth/react";
+import { useRouter } from "next/router";
+import { ButtonSignOut } from "..";
 
-export function SideBar() {
+export async function SideBar() {
+  const session = await getServerSession(authOptions);
+
   return (
     <aside
       className={
@@ -36,15 +43,15 @@ export function SideBar() {
           </Avatar>
           <Separator orientation={"vertical"} />
 
-          <div className="flex flex-col gap-1">
+          <div className="flex flex-col gap-1 w-full">
             <Link
               href={`/dashboard/profile`}
               className={
-                "overflow-hidden flex items-center text-sm font-semibold"
+                "overflow-hidden flex items-center text-sm font-semibold capitalize"
               }>
-              Lucas Campos
+              {session?.user?.user_name}
             </Link>
-            <button className={"text-xs text-end"}>sair</button>
+            <ButtonSignOut />
           </div>
         </div>
       </div>

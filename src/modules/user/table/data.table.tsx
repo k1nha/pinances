@@ -62,7 +62,7 @@ export function DataTable<T, V>({ columns, data }: DataTableProps<T, V>) {
           ) : (
             <TableRow>
               <TableCell colSpan={columns.length} className="h-24 text-center">
-                No results.
+                Sem Resultados
               </TableCell>
             </TableRow>
           )}

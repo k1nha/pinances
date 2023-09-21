@@ -1,4 +1,4 @@
-import { NextApiResponse } from "next";
+import { NextResponse } from "next/server";
 import { ZodError } from "zod";
 
 class ApiError extends Error {
@@ -12,48 +12,42 @@ class ApiError extends Error {
   }
 }
 
-class ErrorHandler {
-  static handle(res: NextApiResponse, error: any): void {
-    if (error instanceof ApiError) {
-      const { statusCode, message, details } = error;
+export function HandleError(error: any) {
+  if (error instanceof ApiError) {
+    const { statusCode, message, details } = error;
 
-      res.status(statusCode).json({
-        error: {
-          message,
-          details,
-        },
-      });
-    } else if (error instanceof ZodError) {
-      const errorMessage = "Validation error";
-      const errorDetails = error.issues.map((issue) => ({
-        code: issue.code,
-        message: issue.message,
-        path: issue.path.join("."),
-      }));
+    const errorObject = {
+      message,
+      details,
+    };
 
-      ErrorHandler.send(res, 400, errorMessage, errorDetails);
-    } else if (error instanceof Error) {
-      const errorMessage = "An error occurred";
+    return NextHandleResponse(errorObject, statusCode);
+  } else if (error instanceof ZodError) {
+    const errorMessage = "Validation error";
+    const errorDetails = error.issues.map((issue) => ({
+      code: issue.code,
+      message: issue.message,
+      path: issue.path.join("."),
+    }));
 
-      ErrorHandler.send(res, 500, errorMessage, error.message);
-    } else {
-      ErrorHandler.send(res, 500, "An unknown error occurred");
-    }
-  }
+    const errorObject = {
+      errorMessage,
+      details: errorDetails,
+    };
 
-  private static send(
-    res: NextApiResponse,
-    statusCode: number,
-    message: string,
-    details?: any
-  ): void {
-    res.status(statusCode).json({
-      error: {
-        message,
-        details,
-      },
-    });
+    return NextHandleResponse(errorObject, 400);
+  } else if (error instanceof Error) {
+    const errorMessage = "An error occurred";
+
+    return NextHandleResponse(errorMessage, 404);
+  } else {
+    const error = new Error("Unknown error occurred");
+    return NextHandleResponse(error, 404);
   }
 }
 
-export { ApiError, ErrorHandler };
+export function NextHandleResponse(data: any, statusCode: number) {
+  return NextResponse.json(data, {
+    status: statusCode,
+  });
+}

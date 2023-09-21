@@ -1,4 +1,4 @@
-"use client"
+"use client";
 import { Login } from "@/modules/user";
 
 export default function Home() {

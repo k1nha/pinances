@@ -1,4 +1,5 @@
 "use client";
+import { Card } from "@/components/ui";
 import { TransactionModule } from "@/modules/user";
 
 export default function Transaction() {
@@ -9,7 +10,12 @@ export default function Transaction() {
         <h1 className={"text-2xl font-semibold"}>Transações</h1>
       </div>
 
-      <TransactionModule />
+      <Card className={"p-6 flex flex-col"}>
+        <h1 className={"font-semibold"}>Adicionar nova transação</h1>
+        <TransactionModule />
+      </Card>
+
+      <Card className={"p-6"}></Card>
     </section>
   );
 }

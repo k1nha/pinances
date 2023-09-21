@@ -15,6 +15,18 @@ import { DataTable, Type, transactionsColumns } from "@/modules/user";
 //   }[];
 // };
 
+async function getData() {
+  const res = await fetch(
+    "http://localhost:3000/api/v1/transactiontype/650770784dfe37a6c7d8d01f"
+  );
+
+  if (!res.ok) {
+    throw new Error("Failed to fetch data");
+  }
+
+  return res.json();
+}
+
 export default function Types() {
   return (
     <section

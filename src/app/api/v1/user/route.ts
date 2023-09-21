@@ -1,5 +1,6 @@
 import { createUser, getAllUsers } from "@/lib/prisma";
 import { UserSchema } from "@/shared/types";
+import { HandleError } from "@/utils";
 import { NextResponse } from "next/server";
 
 export async function GET(req: Request) {
@@ -8,12 +9,20 @@ export async function GET(req: Request) {
 
     return NextResponse.json(users);
   } catch (err) {
-    console.log(err);
+    return HandleError(err);
   }
 }
 
 export async function POST(req: Request, res: NextResponse) {
-  const userValidation = UserSchema.parse(req.body);
+  try {
+    const body = await req.json();
 
-  const userCreated = await createUser(userValidation);
+    const userValidation = UserSchema.parse(body);
+
+    const userCreated = await createUser(userValidation);
+
+    return NextResponse.json(userCreated, { status: 201 });
+  } catch (err) {
+    return HandleError(err);
+  }
 }

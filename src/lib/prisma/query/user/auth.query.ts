@@ -30,9 +30,11 @@ export async function auth({
   });
 
   const userToken = {
-    user_id: user.id,
-    user_email: user.email,
-    user_name: user.name,
+    user: {
+      user_id: user.id,
+      user_email: user.email,
+      user_name: user.name,
+    },
     token,
   };
 

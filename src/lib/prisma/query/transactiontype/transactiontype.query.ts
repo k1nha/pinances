@@ -13,7 +13,6 @@ export async function createTransactionType(data: TransactionType) {
     throw new Error("TransactionType already exists");
   }
 
-  // TODO: Remove return password
   const transactionTypeCreated = await prisma.transactionType.create({
     data,
   });
