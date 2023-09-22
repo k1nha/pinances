@@ -1,4 +1,13 @@
 import { ActionsTable } from "@/components";
+import {
+  Dialog,
+  DialogContent,
+  DialogDescription,
+  DialogHeader,
+  DialogTitle,
+  DialogTrigger,
+} from "@/components/ui";
+import { SolarPenOutline, SolarTrashBin2Linear } from "@/shared/icons";
 import { capitalizeFirstLetter } from "@/utils";
 import { ColumnDef } from "@tanstack/react-table";
 
@@ -10,7 +19,7 @@ type TransactionType = {
   updated_at: Date;
 };
 
-export const transactionsColumns: ColumnDef<TransactionType>[] = [
+export const transactionsTypeColumns: ColumnDef<TransactionType>[] = [
   {
     accessorKey: "name_type",
     header: "Nome da categoria",
@@ -36,8 +45,6 @@ export const transactionsColumns: ColumnDef<TransactionType>[] = [
         "pt-BR"
       );
 
-      console.log(formatedDate);
-
       return <div>{formatedDate}</div>;
     },
   },
@@ -57,10 +64,21 @@ export const transactionsColumns: ColumnDef<TransactionType>[] = [
     id: "actions",
     cell: ({ row }) => {
       return (
-        <ActionsTable
-          onDelete={() => console.log(row.original.id)}
-          onUpdate={() => console.log(row.original.id)}
-        />
+        <div className={"flex gap-2"}>
+          <ActionsTable
+            title={"Editar item"}
+            icon={<SolarPenOutline />}
+            onClick={() => console.log(row.original.id)}
+          />
+          <ActionsTable
+            title={"Você tem certeza disso?"}
+            description={
+              "Essa ação não pode ser revertida. Você tem certeza de apagar permanentemente esse registro?"
+            }
+            icon={<SolarTrashBin2Linear height={18} width={18} />}
+            onClick={() => console.log(row.original.id)}
+          />
+        </div>
       );
     },
   },

@@ -117,9 +117,7 @@ export function TransactionForm({
                   )}>
                   <CalendarIcon className="mr-2 h-4 w-4" />
                   {date ? (
-                   
-                   format(date, "PPP", { locale: ptBR })
-                   
+                    format(date, "PPP", { locale: ptBR })
                   ) : (
                     <span>Selecione uma data</span>
                   )}

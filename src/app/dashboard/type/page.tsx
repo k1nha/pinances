@@ -1,31 +1,8 @@
 "use client";
 import { TypeTransaction } from "@/components/transactions";
 import { Card } from "@/components/ui";
-import { DataTable, Type, transactionsColumns } from "@/modules/user";
-
-// type Props = {
-//   data: {
-//     id: string;
-//     name_type: string;
-//     finance_type: string;
-//     created_at: Date;
-//     updated_at: Date;
-//     deleted_at: Date | null;
-//     user_id: string;
-//   }[];
-// };
-
-async function getData() {
-  const res = await fetch(
-    "http://localhost:3000/api/v1/transactiontype/650770784dfe37a6c7d8d01f"
-  );
-
-  if (!res.ok) {
-    throw new Error("Failed to fetch data");
-  }
-
-  return res.json();
-}
+import { TableType } from "@/modules/pages/types/data-table";
+import { Type } from "@/modules/user";
 
 export default function Types() {
   return (
@@ -63,7 +40,8 @@ export default function Types() {
             <h1 className={"font-semibold"}>Categorias</h1>
             <p className={"text-sm text-slate-500"}>Tabela com as categorias</p>
           </div>
-          <DataTable columns={transactionsColumns} data={[]} />
+          {/*  */}
+          <TableType />
         </Card>
 
         <Card className={"p-6"}>
@@ -80,16 +58,3 @@ export default function Types() {
     </section>
   );
 }
-
-// export const getServerSideProps: GetServerSideProps = async () => {
-//   const res = await fetch(
-//     "http://localhost:3000/api/v1/transactiontype/650770784dfe37a6c7d8d01f"
-//   );
-//   const data = await res.json();
-
-//   return {
-//     props: {
-//       data,
-//     },
-//   };
-// };
