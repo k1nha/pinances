@@ -7,7 +7,7 @@ import {
   AlertDialogFooter,
   AlertDialogHeader,
   AlertDialogTitle,
-  AlertDialogTrigger
+  AlertDialogTrigger,
 } from "../ui";
 
 type ActionsTableProps = {
@@ -26,7 +26,7 @@ export function ActionsTable({
   return (
     <AlertDialog>
       <AlertDialogTrigger asChild id={"delete"}>
-        {icon}
+        <button className={`p-2 bg-gray-100 rounded-lg`}>{icon}</button>
       </AlertDialogTrigger>
 
       {/* Delete */}
