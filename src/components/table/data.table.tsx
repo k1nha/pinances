@@ -97,7 +97,7 @@ export function DataTable<T, V>({ columns, data }: DataTableProps<T, V>) {
           </Button>
         </div>
       ) : (
-        ""
+        <></>
       )}
     </div>
   );
