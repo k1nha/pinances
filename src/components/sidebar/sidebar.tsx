@@ -3,13 +3,15 @@ import { routes } from "@/shared/constants";
 import { LogoIcon } from "@/shared/icons";
 import { getServerSession } from "next-auth";
 import Link from "next/link";
-import { Avatar, AvatarFallback, AvatarImage, Separator } from "../ui";
-import { signOut } from "next-auth/react";
-import { useRouter } from "next/router";
 import { ButtonSignOut } from "..";
+import { Avatar, AvatarFallback, AvatarImage, Separator } from "../ui";
 
 export async function SideBar() {
   const session = await getServerSession(authOptions);
+
+  function stringAvatar(name: string) {
+    return `${name.split(" ")[0][0]}${name.split(" ")[1][0]}`;
+  }
 
   return (
     <aside
@@ -39,7 +41,9 @@ export async function SideBar() {
         <div className="mt-auto border flex border-slate-400 p-2 gap-2 rounded-lg">
           <Avatar>
             <AvatarImage />
-            <AvatarFallback>LC</AvatarFallback>
+            <AvatarFallback>
+              {stringAvatar(session?.user.user_name || "")}
+            </AvatarFallback>
           </Avatar>
           <Separator orientation={"vertical"} />
 
