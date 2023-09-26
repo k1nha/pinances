@@ -15,6 +15,7 @@ model User {
   name       String
   password   String
   email      String    @unique
+  wallet     Int
   created_at DateTime  @default(now()) @db.Timestamp
   updated_at DateTime  @updatedAt @db.Timestamp
   deleted_at DateTime? @db.Timestamp
@@ -42,15 +43,15 @@ model TransactionType {
 }
 
 model Finances {
-  id               String        @id @default(auto()) @map("_id") @db.ObjectId
-  transaction_type String        @db.ObjectId
-  user_id          String        @db.ObjectId
+  id               String    @id @default(auto()) @map("_id") @db.ObjectId
+  transaction_type String    @db.ObjectId
+  user_id          String    @db.ObjectId
   value            Int
   description      String?
   finance_date     DateTime
-  created_at       DateTime      @default(now()) @db.Timestamp
-  updated_at       DateTime      @updatedAt @db.Timestamp
-  deleted_at       DateTime?     @db.Timestamp
+  created_at       DateTime  @default(now()) @db.Timestamp
+  updated_at       DateTime  @updatedAt @db.Timestamp
+  deleted_at       DateTime? @db.Timestamp
   // finance_type     FinanceSource
 
   transactionType TransactionType @relation(fields: [transaction_type], references: [id])
