@@ -1,1 +1,0 @@
-export * from "./transactiontype.query";

@@ -1,4 +1,4 @@
-import { getAllInputTransaction, getAllOutputTransaction } from "@/lib/prisma";
+import { prisma } from "@/lib/prisma";
 import { HandleError } from "@/utils";
 import { NextResponse } from "next/server";
 import { z } from "zod";
@@ -10,7 +10,12 @@ export async function GET(
   try {
     const id = z.string().parse(params.id);
 
-    const transactionType = await getAllOutputTransaction(id);
+    const transactionType = await prisma.transactionType.findMany({
+      where: {
+        user_id: id,
+        finance_type: "SAIDA",
+      },
+    });
 
     return NextResponse.json(transactionType, {
       status: 200,
