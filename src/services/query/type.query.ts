@@ -18,3 +18,14 @@ export const getAllTypes = async () => {
 
   return res.data;
 };
+
+export const createTypeTransaction = async (body: any) => {
+  const session = await getSession();
+
+  const res = await HTTP.post("/v1/transactiontype", {
+    user_id: session?.user.user_id,
+    ...body,
+  });
+
+  return res.data;
+};

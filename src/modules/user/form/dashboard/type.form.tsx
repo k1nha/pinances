@@ -32,12 +32,11 @@ export function TypeForm({
   id,
   validationSchema,
 }: TypeFormProps) {
-  const { errors, touched, handleSubmit, getFieldProps, values } =
-    useFormik({
-      initialValues: data || new TypeClass(),
-      onSubmit,
-      validationSchema,
-    });
+  const { errors, touched, handleSubmit, getFieldProps, values } = useFormik({
+    initialValues: data || new TypeClass(),
+    onSubmit,
+    validationSchema,
+  });
 
   return (
     <form id={id} onSubmit={handleSubmit}>
@@ -52,8 +51,8 @@ export function TypeForm({
           <SelectContent>
             <SelectGroup>
               <SelectLabel>Tipo</SelectLabel>
-              <SelectItem value={"entrada"}>Entrada</SelectItem>
-              <SelectItem value={"saida"}>Saída</SelectItem>
+              <SelectItem value={"ENTRADA"}>Entrada</SelectItem>
+              <SelectItem value={"SAIDA"}>Saída</SelectItem>
             </SelectGroup>
           </SelectContent>
         </Select>
