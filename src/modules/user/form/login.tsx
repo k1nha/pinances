@@ -28,7 +28,6 @@ export function Login() {
     });
 
     if (result?.error) {
-      console.log(result);
       toast({
         variant: "destructive",
         title: "Algo deu errado!",

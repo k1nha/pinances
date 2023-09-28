@@ -1,21 +1,20 @@
-import { transactionsTypeColumns } from "@/modules/user";
-import { getAllTypes } from "@/services";
-import { LoadingSpinner } from "@/shared/icons";
-import { useQuery } from "@tanstack/react-query";
+import { ListType } from "@/app/dashboard/type/page";
 import { DataTable } from "@/components";
+import { transactionsTypeColumns } from "@/modules/user";
+import { LoadingSpinner } from "@/shared/icons";
 
-export function TableType() {
-  const { data, isLoading } = useQuery({
-    queryKey: ["list-type"],
-    queryFn: getAllTypes,
-  });
+type TableTypeProps = {
+  data: ListType[];
+  isLoading: boolean;
+};
 
-  if (isLoading)
+export function TableType(props: TableTypeProps) {
+  if (props.isLoading)
     return (
       <>
         <LoadingSpinner />
       </>
     );
 
-  return <DataTable columns={transactionsTypeColumns} data={data} />;
+  return <DataTable columns={transactionsTypeColumns} data={props.data} />;
 }

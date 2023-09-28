@@ -1,43 +1,43 @@
 "use client";
+import { ListType } from "@/app/dashboard/type/page";
 import { Button } from "@/components/ui";
-import { TransactionClass, TransactionForm } from ".";
+import { getAllTypes } from "@/services";
+import { useQuery } from "@tanstack/react-query";
 import * as yup from "yup";
-import axios from "axios";
-import { useEffect, useState } from "react";
+import { TransactionClass, TransactionForm } from ".";
 
-const transactionSchema = yup.object({});
+const transactionSchema = yup.object({
+  transaction_type: yup.string(),
+  value: yup.string(),
+  description: yup.string(),
+  finance_date: yup.string(),
+});
 
 export function TransactionModule() {
-  const [data, setData] = useState([]);
+  const { data } = useQuery<ListType[]>({
+    queryKey: ["list-type"],
+    queryFn: getAllTypes,
+  });
 
-  async function t() {
-    return await axios
-      .get(
-        "http://localhost:3000/api/v1/transactiontype/650770784dfe37a6c7d8d01f"
-      )
-      .then((res) => setData(res.data));
+  function handleSubmitTransactionForm({ value, ...rest }: TransactionClass) {
+    const transaction = {
+      value: +value * 100,
+      ...rest,
+    };
+
+    console.log(transaction);
   }
-
-  function handleSubmitTransactionForm(data: TransactionClass) {
-    //
-    console.log(data);
-  }
-
-  useEffect(() => {
-    t();
-    console.log(data);
-  }, []);
 
   return (
     <>
       <TransactionForm
         onSubmit={handleSubmitTransactionForm}
-        id={"form - transaction"}
+        id={"form-transaction"}
         validationSchema={transactionSchema}
-        typesDATA={data}
+        typesDATA={data || []}
       />
 
-      <Button type={"submit"} id={"form-transaction"} className={"mt-4"}>
+      <Button type={"submit"} form={"form-transaction"} className={"mt-4"}>
         Enviar
       </Button>
     </>
