@@ -1,3 +1,4 @@
+import { Prisma } from "@prisma/client";
 import { NextResponse } from "next/server";
 import { ZodError } from "zod";
 
@@ -36,13 +37,31 @@ export function HandleError(error: any) {
     };
 
     return NextHandleResponse(errorObject, 400);
+  } else if (error instanceof Prisma.PrismaClientKnownRequestError) {
+    console.log("error prisma");
+    return NextResponse.json(
+      {
+        error: {
+          cause: error.cause,
+          message: error.message,
+          meta: error.meta,
+        },
+      },
+      { status: 400 }
+    );
   } else if (error instanceof Error) {
-    const errorMessage = "An error occurred";
-
-    return NextHandleResponse(errorMessage, 404);
+    return NextResponse.json(
+      {
+        error: {
+          cause: error.cause,
+          message: error.message,
+        },
+      },
+      { status: 400 }
+    );
   } else {
-    const error = new Error("Unknown error occurred");
-    return NextHandleResponse(error, 404);
+    const error = new Error("Um erro desconhecido ocorreu");
+    return NextResponse.json({ error }, { status: 400 });
   }
 }
 
