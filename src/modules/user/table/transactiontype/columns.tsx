@@ -1,15 +1,9 @@
 import { ActionsTable } from "@/components";
-import {
-  Dialog,
-  DialogContent,
-  DialogDescription,
-  DialogHeader,
-  DialogTitle,
-  DialogTrigger,
-} from "@/components/ui";
+import { useDeleteItemTable } from "@/shared/hooks/useDeleteItemTable";
 import { SolarPenOutline, SolarTrashBin2Linear } from "@/shared/icons";
 import { capitalizeFirstLetter } from "@/utils";
 import { ColumnDef } from "@tanstack/react-table";
+import axios from "axios";
 
 type TransactionType = {
   id: string;
@@ -63,11 +57,15 @@ export const transactionsTypeColumns: ColumnDef<TransactionType>[] = [
     header: "Ações",
     id: "actions",
     cell: ({ row }) => {
+      // eslint-disable-next-line react-hooks/rules-of-hooks
+      const { mutate } = useDeleteItemTable(row.original.id, ["list-type"]);
+
       return (
         <div className={"flex gap-2"}>
           <ActionsTable
-            title={"Editar item"}
+            title={`Editar item`}
             icon={<SolarPenOutline />}
+            description={<input></input>}
             onClick={() => console.log(row.original.id)}
           />
           <ActionsTable
@@ -76,7 +74,7 @@ export const transactionsTypeColumns: ColumnDef<TransactionType>[] = [
               "Essa ação não pode ser revertida. Você tem certeza de apagar permanentemente esse registro?"
             }
             icon={<SolarTrashBin2Linear height={18} width={18} />}
-            onClick={() => console.log(row.original.id)}
+            onClick={() => mutate()}
           />
         </div>
       );

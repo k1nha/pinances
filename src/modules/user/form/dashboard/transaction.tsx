@@ -25,6 +25,7 @@ export function TransactionModule() {
       ...rest,
     };
 
+    // TODO: Create request
     console.log(transaction);
   }
 
