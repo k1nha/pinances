@@ -1,9 +1,8 @@
 import { ActionsTable } from "@/components";
 import { useDeleteItemTable } from "@/shared/hooks/useDeleteItemTable";
-import { SolarPenOutline, SolarTrashBin2Linear } from "@/shared/icons";
+import { SolarTrashBin2Linear } from "@/shared/icons";
 import { capitalizeFirstLetter } from "@/utils";
 import { ColumnDef } from "@tanstack/react-table";
-import axios from "axios";
 
 type TransactionType = {
   id: string;
@@ -58,16 +57,14 @@ export const transactionsTypeColumns: ColumnDef<TransactionType>[] = [
     id: "actions",
     cell: ({ row }) => {
       // eslint-disable-next-line react-hooks/rules-of-hooks
-      const { mutate } = useDeleteItemTable(row.original.id, ["list-type"]);
+      const { mutate } = useDeleteItemTable(
+        row.original.id,
+        ["list-type"],
+        "transactiontype"
+      );
 
       return (
         <div className={"flex gap-2"}>
-          <ActionsTable
-            title={`Editar item`}
-            icon={<SolarPenOutline />}
-            description={<input></input>}
-            onClick={() => console.log(row.original.id)}
-          />
           <ActionsTable
             title={"Você tem certeza disso?"}
             description={

@@ -25,7 +25,7 @@ import { useState } from "react";
 
 export class TransactionClass {
   transaction_type!: string;
-  value!: string;
+  value!: number;
   description!: string;
   finance_date!: string;
 

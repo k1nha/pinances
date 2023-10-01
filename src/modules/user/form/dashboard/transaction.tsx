@@ -2,9 +2,10 @@
 import { ListType } from "@/app/dashboard/type/page";
 import { Button } from "@/components/ui";
 import { getAllTypes } from "@/services";
-import { useQuery } from "@tanstack/react-query";
+import { useMutation, useQuery } from "@tanstack/react-query";
 import * as yup from "yup";
 import { TransactionClass, TransactionForm } from ".";
+import { createFinance } from "@/services/query/transactions";
 
 const transactionSchema = yup.object({
   transaction_type: yup.string(),
@@ -19,14 +20,21 @@ export function TransactionModule() {
     queryFn: getAllTypes,
   });
 
-  function handleSubmitTransactionForm({ value, ...rest }: TransactionClass) {
+  const { mutate: createTransaction } = useMutation({
+    mutationFn: async (data: TransactionClass) => createFinance(data),
+  });
+
+  async function handleSubmitTransactionForm({
+    value,
+    ...rest
+  }: TransactionClass) {
     const transaction = {
       value: +value * 100,
       ...rest,
     };
 
     // TODO: Create request
-    console.log(transaction);
+    createTransaction(transaction);
   }
 
   return (

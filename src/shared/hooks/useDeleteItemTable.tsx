@@ -3,10 +3,14 @@ import { queryClient } from "@/lib/query";
 import { HTTP } from "@/services";
 import { QueryKey, useMutation } from "@tanstack/react-query";
 
-export const useDeleteItemTable = (id: string, query: QueryKey) => {
+export const useDeleteItemTable = (
+  id: string,
+  query: QueryKey,
+  url: string
+) => {
   const { mutate, error, data } = useMutation({
     mutationFn: async () => {
-      await HTTP.delete(`v1/transactiontype?id=${id}`);
+      await HTTP.delete(`v1/${url}?id=${id}`);
     },
     onSuccess: () => {
       queryClient.invalidateQueries(query);

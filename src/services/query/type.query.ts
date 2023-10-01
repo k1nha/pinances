@@ -19,6 +19,7 @@ export const getAllTypes = async () => {
   return res.data;
 };
 
+// TODO: Type body
 export const createTypeTransaction = async (body: any) => {
   const session = await getSession();
 
