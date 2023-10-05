@@ -35,6 +35,15 @@ export async function POST(
         description: z.string().nullable(),
       })
       .parse(req.body);
+
+    const transaction = await prisma.finances.create({
+      data: {
+        user_id: params.id,
+        ...transactionSchema,
+      },
+    });
+
+    return NextResponse.json(transaction, { status: 200 });
   } catch (err) {
     return HandleError(err);
   }
