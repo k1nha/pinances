@@ -38,7 +38,6 @@ export function HandleError(error: any) {
 
     return NextHandleResponse(errorObject, 400);
   } else if (error instanceof Prisma.PrismaClientKnownRequestError) {
-    console.log("error prisma");
     return NextResponse.json(
       {
         error: {

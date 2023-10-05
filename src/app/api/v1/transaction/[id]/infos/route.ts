@@ -12,31 +12,14 @@ export async function GET(
       throw new Error("Params missing");
     }
 
-    // const infoEntrada = await prisma.finances.aggregate({
-    //   _count: true,
-    //   where: {
-    //     user_id: params.id,
-    //     transactionType: {
-    //       name_type: "ENTRADA",
-    //     },
-    //     finance_date: {
-    //       gte: subMonths(new Date(), 1),
-    //     },
-    //   },
-    // });
-
-    // const infoSaida = await prisma.finances.aggregate({
-    //   _count: true,
-    //   where: {
-    //     user_id: params.id,
-    //     transactionType: {
-    //       name_type: "SAIDA",
-    //     },
-    //     finance_date: {
-    //       gte: subMonths(new Date(), 1),
-    //     },
-    //   },
-    // });
+    const valorEmConta = await prisma.user.findFirst({
+      where: {
+        id: params.id,
+      },
+      select: {
+        wallet: true,
+      },
+    });
 
     const [entrada, saida] = await prisma.$transaction([
       prisma.finances.aggregate({
@@ -66,11 +49,12 @@ export async function GET(
     ]);
 
     const response = {
-      entrada,
-      saida,
+      entrada: entrada._count,
+      saida: saida._count,
+      valorEmConta: valorEmConta?.wallet,
     };
 
-    return NextResponse.json({ entrada, saida }, { status: 200 });
+    return NextResponse.json(response, { status: 200 });
   } catch (err) {
     return HandleError(err);
   }
