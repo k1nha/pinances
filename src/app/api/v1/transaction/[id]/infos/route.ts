@@ -12,7 +12,7 @@ export async function GET(
       throw new Error("Params missing");
     }
 
-    const valorEmConta = await prisma.user.findFirst({
+    const cashInWallet = await prisma.user.findFirst({
       where: {
         id: params.id,
       },
@@ -21,7 +21,7 @@ export async function GET(
       },
     });
 
-    const [entrada, saida] = await prisma.$transaction([
+    const [inflows, outflows] = await prisma.$transaction([
       prisma.finances.aggregate({
         _count: true,
         where: {
@@ -48,10 +48,17 @@ export async function GET(
       }),
     ]);
 
+    const typeTransactions = await prisma.transactionType.count({
+      where: {
+        user_id: params.id,
+      },
+    });
+
     const response = {
-      entrada: entrada._count,
-      saida: saida._count,
-      valorEmConta: valorEmConta?.wallet,
+      entrada: inflows._count,
+      saida: outflows._count,
+      valorEmConta: cashInWallet?.wallet,
+      quantidadeTipos: typeTransactions,
     };
 
     return NextResponse.json(response, { status: 200 });
