@@ -31,6 +31,7 @@ export function Login() {
       toast({
         variant: "destructive",
         title: "Algo deu errado!",
+        description: `${result.error}`,
       });
 
       setIsSubmitting((prev) => !prev);
@@ -42,16 +43,16 @@ export function Login() {
   }
 
   return (
-    <div className={"w-full px-10 flex flex-col gap-3 max-w-md"}>
+    <div className="w-full px-10 flex flex-col gap-3 max-w-md">
       <LoginForm
         onSubmit={handleLogin}
         validationSchema={loginSchema}
-        id={"login-form"}
+        id="login-form"
       />
       <Button
-        type={"submit"}
-        variant={"default"}
-        form={"login-form"}
+        type="submit"
+        variant="default"
+        form="login-form"
         disabled={isSubmitting}>
         {isSubmitting ? (
           <>

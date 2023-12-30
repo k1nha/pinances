@@ -41,12 +41,12 @@ export function TransactionModule() {
     <>
       <TransactionForm
         onSubmit={handleSubmitTransactionForm}
-        id={"form-transaction"}
+        id="form-transaction"
         validationSchema={transactionSchema}
         typesDATA={data || []}
       />
 
-      <Button type={"submit"} form={"form-transaction"} className={"mt-4"}>
+      <Button type="submit" form="form-transaction" className="mt-4">
         Enviar
       </Button>
     </>

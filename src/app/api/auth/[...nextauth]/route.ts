@@ -18,10 +18,10 @@ export const authOptions: NextAuthOptions = {
       async authorize(cred, req) {
         const response = await axios.post(
           "http://localhost:3000/api/v1/login",
-          {
+          JSON.stringify({
             email: cred?.email,
             password: cred?.password,
-          },
+          }),
           {
             headers: {
               "Content-Type": "application/json",
@@ -29,7 +29,7 @@ export const authOptions: NextAuthOptions = {
           }
         );
 
-        const user = response.data;
+        const user = await response.data;
 
         if (user && response.status === 200) {
           return user;

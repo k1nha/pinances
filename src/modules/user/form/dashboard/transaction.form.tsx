@@ -33,7 +33,7 @@ export class TransactionClass {
     this.description = "";
     this.finance_date = "";
     this.transaction_type = "";
-    this.value = "";
+    this.value = 0;
   }
 }
 
@@ -68,26 +68,26 @@ export function TransactionForm({
   return (
     <form id={id} onSubmit={handleSubmit}>
       <div>
-        <div className={"mb-2"}>
+        <div className="mb-2">
           <Label>Selecione o tipo da transação</Label>
           <Select onValueChange={(e) => setType(e)}>
             <SelectTrigger>
-              <SelectValue placeholder={"Selecione o tipo da transação"} />
+              <SelectValue placeholder="Selecione o tipo da transação" />
             </SelectTrigger>
             <SelectContent>
               <SelectGroup>
-                <SelectItem value={"ENTRADA"}>Entrada</SelectItem>
-                <SelectItem value={"SAIDA"}>Saida</SelectItem>
+                <SelectItem value="ENTRADA">Entrada</SelectItem>
+                <SelectItem value="SAIDA">Saida</SelectItem>
               </SelectGroup>
             </SelectContent>
           </Select>
         </div>
 
-        <div className={"mb-2"}>
+        <div className="mb-2">
           <Label>Selecione uma categoria</Label>
           <Select onValueChange={(e) => (values.transaction_type = e)}>
             <SelectTrigger>
-              <SelectValue placeholder={"Selecione uma categoria"} />
+              <SelectValue placeholder="Selecione uma categoria" />
             </SelectTrigger>
             <SelectContent>
               <SelectGroup>
@@ -104,14 +104,14 @@ export function TransactionForm({
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-0 md:gap-4">
-          <div className={"mb-2"}>
+          <div className="mb-2">
             <Label>Valor</Label>
             <Input
-              type={"number"}
+              type="number"
               {...getFieldProps("value")}
               step={0.01}
               min={0}
-              placeholder={"Digite um valor"}
+              placeholder="Digite um valor"
             />
           </div>
 
@@ -120,7 +120,7 @@ export function TransactionForm({
             <Popover>
               <PopoverTrigger asChild>
                 <Button
-                  variant={"outline"}
+                  variant="outline"
                   className={cn(
                     "w-full justify-start text-left font-normal",
                     !calendarDate && "text-muted-foreground"
@@ -148,10 +148,10 @@ export function TransactionForm({
         <div className="">
           <Label>Descrição</Label>
           <Input
-            type={"text"}
+            type="text"
             {...getFieldProps("description")}
             disabled={disabled}
-            placeholder={"Opicional: Digite uma descrição"}
+            placeholder="Opicional: Digite uma descrição"
           />
         </div>
       </div>

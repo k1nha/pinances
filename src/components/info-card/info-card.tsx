@@ -9,8 +9,8 @@ interface InfoCardProps {
 
 export function InfoCard({ icon, title, value }: InfoCardProps) {
   return (
-    <Card className={"p-6"}>
-      <CardTitle className={"flex justify-between items-center"}>
+    <Card className="p-6">
+      <CardTitle className="flex justify-between items-center">
         <span>{title}</span>
         {icon}
       </CardTitle>

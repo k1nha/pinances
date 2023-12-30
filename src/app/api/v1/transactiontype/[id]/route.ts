@@ -5,7 +5,7 @@ import { z } from "zod";
 
 export async function GET(
   req: Request,
-  { params }: { params: { id: string } }
+  { params }: { params: { id: string } },
 ) {
   try {
     const id = z.string().parse(params.id);

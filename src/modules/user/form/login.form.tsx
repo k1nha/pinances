@@ -28,24 +28,24 @@ export function LoginForm({
   });
 
   return (
-    <form onSubmit={handleSubmit} id={id} className={"w-full"}>
+    <form onSubmit={handleSubmit} id={id} className="w-full">
       <div className="flex flex-col">
-        <label className={"text-sm text-zinc-600 mb-1"}>Email</label>
-        <Input type={"email"} {...getFieldProps("email")} disabled={disabled} />
+        <label className="text-sm text-zinc-600 mb-1">Email</label>
+        <Input type="email" {...getFieldProps("email")} disabled={disabled} />
         {errors.email && touched.email && (
-          <p className={"text-xs text-red-400 text-end"}>{errors.email}</p>
+          <p className="text-xs text-red-400 text-end">{errors.email}</p>
         )}
       </div>
 
       <div className="flex flex-col mt-2">
-        <label className={"text-sm text-zinc-600 mb-1"}>Senha</label>
+        <label className="text-sm text-zinc-600 mb-1">Senha</label>
         <Input
-          type={"password"}
+          type="password"
           {...getFieldProps("password")}
           disabled={disabled}
         />
         {errors.password && touched.password && (
-          <p className={"text-xs text-red-400 text-end"}>{errors.password}</p>
+          <p className="text-xs text-red-400 text-end">{errors.password}</p>
         )}
       </div>
     </form>

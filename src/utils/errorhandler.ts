@@ -6,7 +6,7 @@ class ApiError extends Error {
   constructor(
     public statusCode: number,
     message: string,
-    public details?: any
+    public details?: any,
   ) {
     super(message);
     this.name = this.constructor.name;
@@ -46,7 +46,7 @@ export function HandleError(error: any) {
           meta: error.meta,
         },
       },
-      { status: 400 }
+      { status: 400 },
     );
   } else if (error instanceof Error) {
     return NextResponse.json(
@@ -56,7 +56,7 @@ export function HandleError(error: any) {
           message: error.message,
         },
       },
-      { status: 400 }
+      { status: 400 },
     );
   } else {
     const error = new Error("Um erro desconhecido ocorreu");

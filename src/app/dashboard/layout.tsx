@@ -15,7 +15,7 @@ export default async function UserLayout({
   }
 
   return (
-    <main className={"min-h-screen w-full flex"}>
+    <main className="min-h-screen w-full flex">
       <SideBar />
 
       {children}

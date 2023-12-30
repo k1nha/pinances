@@ -46,32 +46,30 @@ export function TypeForm({
           onValueChange={(e) => (values.finance_type = e)}
           disabled={disabled}>
           <SelectTrigger>
-            <SelectValue placeholder={"Selecione o tipo"} />
+            <SelectValue placeholder="Selecione o tipo" />
           </SelectTrigger>
           <SelectContent>
             <SelectGroup>
               <SelectLabel>Tipo</SelectLabel>
-              <SelectItem value={"ENTRADA"}>Entrada</SelectItem>
-              <SelectItem value={"SAIDA"}>Saída</SelectItem>
+              <SelectItem value="ENTRADA">Entrada</SelectItem>
+              <SelectItem value="SAIDA">Saída</SelectItem>
             </SelectGroup>
           </SelectContent>
         </Select>
         {errors.finance_type && touched.finance_type && (
-          <p className={"text-xs text-red-400 text-end"}>
-            {errors.finance_type}
-          </p>
+          <p className="text-xs text-red-400 text-end">{errors.finance_type}</p>
         )}
       </div>
 
       <div className="flex flex-col mt-4 gap-2">
         <Label>Nome da categoria</Label>
         <Input
-          type={"text"}
+          type="text"
           {...getFieldProps("name_type")}
           disabled={disabled}
         />
         {errors.name_type && touched.name_type && (
-          <p className={"text-xs text-red-400 text-end"}>{errors.name_type}</p>
+          <p className="text-xs text-red-400 text-end">{errors.name_type}</p>
         )}
       </div>
     </form>

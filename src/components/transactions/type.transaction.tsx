@@ -10,7 +10,7 @@ export function TypeTransaction({
   return (
     <div className="flex justify-between items-center mt-4">
       <h2>{name}</h2>
-      <p className={"text-sm text-slate-500"}>
+      <p className="text-sm text-slate-500">
         criado em {new Date(createdAt).getDate()}/
         {new Date(createdAt).getMonth()}
       </p>

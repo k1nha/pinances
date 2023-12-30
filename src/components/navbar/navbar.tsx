@@ -10,14 +10,12 @@ export function Navbar() {
           <Link
             href={link}
             key={i}
-            className={
-              "flex flex-col gap-1 items-center justify-center text-sm"
-            }>
+            className="flex flex-col gap-1 items-center justify-center text-sm">
             {icon}
             {name}
           </Link>
         ))}
-        <button className={"flex flex-col gap-1 items-center justify-center text-sm"}>
+        <button className="flex flex-col gap-1 items-center justify-center text-sm">
           <SolarLogout2Outline height={22} width={22} />
           Sair
         </button>

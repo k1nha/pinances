@@ -27,26 +27,25 @@ export async function POST(req: Request) {
 
     const userValidation = UserSchema.parse(body);
 
-    const userExists = await prisma.user.findFirst({
+    const userExists = await prisma.user.findUnique({
       where: {
         email: userValidation.email,
       },
     });
-
     if (userExists) {
       throw new Error("User already exists");
     }
 
-    const passwordHash = await hash(userValidation.password, 10);
+    console.log("buceta");
+
+    const passwordHash = await hash(userValidation.password, 8);
 
     const userCreated = await prisma.user.create({
       data: {
         email: userValidation.email,
         name: userValidation.name,
         password: passwordHash,
-      },
-      select: {
-        password: false,
+        wallet: 0,
       },
     });
 

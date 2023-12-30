@@ -17,7 +17,7 @@ export const createFinance = async (body: any) => {
 
   const response = await HTTP.post(
     `/v1/transactions/${session?.user.user_id}`,
-    body
+    body,
   );
 
   const data = response.data();

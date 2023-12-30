@@ -25,12 +25,12 @@ export function ActionsTable({
 }: ActionsTableProps) {
   return (
     <AlertDialog>
-      <AlertDialogTrigger asChild id={"delete"}>
-        <button className={`p-2 bg-gray-100 rounded-lg`}>{icon}</button>
+      <AlertDialogTrigger asChild id="delete">
+        <button className="p-2 bg-red-400 rounded-lg">{icon}</button>
       </AlertDialogTrigger>
 
       {/* Delete */}
-      <AlertDialogContent id={"delete"}>
+      <AlertDialogContent id="delete">
         <AlertDialogHeader>
           <AlertDialogTitle>{title}</AlertDialogTitle>
           <AlertDialogDescription>{description}</AlertDialogDescription>

@@ -32,7 +32,7 @@ export function DataTable<T, V>({ columns, data }: DataTableProps<T, V>) {
 
   return (
     <div className="">
-      <div className={"rounded-md "}>
+      <div className="rounded-md ">
         <Table>
           <TableHeader>
             {table.getHeaderGroups().map((headergroup) => (
@@ -87,7 +87,7 @@ export function DataTable<T, V>({ columns, data }: DataTableProps<T, V>) {
             disabled={!table.getCanPreviousPage()}>
             Voltar
           </Button>
-          <span className={"text-xs"}>1 de {table.getPageCount()}</span>
+          <span className="text-xs">1 de {table.getPageCount()}</span>
           <Button
             variant="outline"
             size="sm"

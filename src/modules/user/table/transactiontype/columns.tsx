@@ -64,12 +64,10 @@ export const transactionsTypeColumns: ColumnDef<TransactionType>[] = [
       );
 
       return (
-        <div className={"flex gap-2"}>
+        <div className="flex gap-2">
           <ActionsTable
-            title={"Você tem certeza disso?"}
-            description={
-              "Essa ação não pode ser revertida. Você tem certeza de apagar permanentemente esse registro?"
-            }
+            title="Você tem certeza disso?"
+            description="Essa ação não pode ser revertida. Você tem certeza de apagar permanentemente esse registro?"
             icon={<SolarTrashBin2Linear height={18} width={18} />}
             onClick={() => mutate()}
           />
