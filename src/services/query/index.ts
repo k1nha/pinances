@@ -1,1 +1,1 @@
-export * from "./type.query";
+export * from "./category-transactions";

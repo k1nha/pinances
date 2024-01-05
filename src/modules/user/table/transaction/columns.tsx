@@ -4,7 +4,7 @@ type Transaction = {
   id: string;
 };
 
-export const transactionColumns: ColumnDef<Transaction>[] = [
+export const TransactionColumns: ColumnDef<Transaction>[] = [
   {
     accessorKey: "",
     header: "",

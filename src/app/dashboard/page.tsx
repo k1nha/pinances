@@ -7,7 +7,7 @@ export default function Dashboard() {
       <div className="flex justify-between">
         <h1 className="text-2xl font-semibold">Dashboard</h1>
 
-        <Button disabled>ok</Button>
+        <Button disabled>Sair</Button>
       </div>
 
       <DashboardModule />

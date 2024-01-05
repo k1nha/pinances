@@ -20,16 +20,27 @@ import { Button } from "../ui";
 interface DataTableProps<T, V> {
   columns: ColumnDef<T, V>[];
   data: T[];
+  pageSize: number;
 }
 
-export function DataTable<T, V>({ columns, data }: DataTableProps<T, V>) {
+export function DataTable<T, V>({
+  columns,
+  data,
+  pageSize,
+}: DataTableProps<T, V>) {
   const table = useReactTable({
     columns,
     data,
     getCoreRowModel: getCoreRowModel(),
     getPaginationRowModel: getPaginationRowModel(),
+    initialState: {
+      pagination: {
+        pageSize,
+      },
+    },
   });
 
+  // table.setPageSize(5);
   return (
     <div className="">
       <div className="rounded-md ">
@@ -79,7 +90,7 @@ export function DataTable<T, V>({ columns, data }: DataTableProps<T, V>) {
         </Table>
       </div>
       {table.getPageCount() != 1 ? (
-        <div className="flex items-center justify-end space-x-2 py-4">
+        <div className="flex items-center justify-end pt-4 pb-0">
           <Button
             variant="outline"
             size="sm"
@@ -87,7 +98,10 @@ export function DataTable<T, V>({ columns, data }: DataTableProps<T, V>) {
             disabled={!table.getCanPreviousPage()}>
             Voltar
           </Button>
-          <span className="text-xs">1 de {table.getPageCount()}</span>
+          <span className="text-xs px-2">
+            {table.getState().pagination.pageIndex + 1} de{" "}
+            {table.getPageCount() == 0 ? 1 : table.getPageCount()}
+          </span>
           <Button
             variant="outline"
             size="sm"

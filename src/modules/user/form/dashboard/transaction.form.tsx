@@ -1,5 +1,5 @@
 "use client";
-import { ListType } from "@/app/dashboard/type/page";
+import { Categories } from "@/app/dashboard/category/page";
 import {
   Button,
   Calendar,
@@ -21,7 +21,7 @@ import { CalendarIcon } from "@radix-ui/react-icons";
 import { format } from "date-fns";
 import { ptBR } from "date-fns/locale";
 import { useFormik } from "formik";
-import { useState } from "react";
+import { ChangeEvent, useState } from "react";
 
 export class TransactionClass {
   transaction_type!: string;
@@ -38,7 +38,7 @@ export class TransactionClass {
 }
 
 type TransactionFormProps = FormProps<TransactionClass> & {
-  typesDATA: ListType[];
+  typesDATA: Categories[];
 };
 
 export function TransactionForm({
@@ -53,6 +53,25 @@ export function TransactionForm({
     new Date()
   );
   const [type, setType] = useState<string>("");
+  const [value, setValue] = useState<string>("R$ ");
+
+  const formatCurrency = (inputValue: string): string => {
+    let formattedValue = inputValue.replace(/\D/g, "");
+    formattedValue = (Number(formattedValue) / 100)
+      .toFixed(2)
+      .replace(".", ",");
+    return `R$ ${formattedValue}`;
+  };
+
+  const handleInputChange = (event: ChangeEvent<HTMLInputElement>): void => {
+    const inputValue = event.target.value;
+    const formattedValue = formatCurrency(inputValue);
+    setValue(formattedValue);
+    values.value = +event.target.value
+      .replace("R$ ", "")
+      .replace(",", "")
+      .replace(/^0+/, "");
+  };
 
   function setDate(e: any) {
     setCalendarDate(e);
@@ -107,10 +126,8 @@ export function TransactionForm({
           <div className="mb-2">
             <Label>Valor</Label>
             <Input
-              type="number"
-              {...getFieldProps("value")}
-              step={0.01}
-              min={0}
+              value={value}
+              onChange={handleInputChange}
               placeholder="Digite um valor"
             />
           </div>

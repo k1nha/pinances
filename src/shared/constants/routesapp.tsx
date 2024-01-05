@@ -2,6 +2,7 @@ import {
   SolarCardTransferOutline,
   SolarChart2Linear,
   SolarPieChart2Linear,
+  SolarUserCheckRoundedBroken,
 } from "../icons";
 
 type Route = {
@@ -23,7 +24,12 @@ export const routes: Route[] = [
   },
   {
     icon: <SolarPieChart2Linear height={22} width={22} />,
-    link: "/dashboard/type",
-    name: "Tipos",
+    link: "/dashboard/category",
+    name: "Categorias",
+  },
+  {
+    icon: <SolarUserCheckRoundedBroken height={22} width={22} />,
+    link: "/dashboard/profile",
+    name: "Perfil",
   },
 ];

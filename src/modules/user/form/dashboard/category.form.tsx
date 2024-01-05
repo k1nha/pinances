@@ -11,9 +11,8 @@ import {
 } from "@/components/ui";
 import { FormProps } from "@/shared/types";
 import { useFormik } from "formik";
-import { useEffect } from "react";
 
-export class TypeClass {
+export class CategoryClass {
   name_type!: string;
   finance_type!: string;
 
@@ -23,20 +22,26 @@ export class TypeClass {
   }
 }
 
-type TypeFormProps = FormProps<TypeClass>;
+type CategoryFormProps = FormProps<CategoryClass>;
 
-export function TypeForm({
+export function CategoryForm({
   onSubmit,
   data,
   disabled,
   id,
   validationSchema,
-}: TypeFormProps) {
-  const { errors, touched, handleSubmit, getFieldProps, values } = useFormik({
-    initialValues: data || new TypeClass(),
-    onSubmit,
-    validationSchema,
-  });
+}: CategoryFormProps) {
+  const { errors, touched, handleSubmit, getFieldProps, values, resetForm } =
+    useFormik({
+      initialValues: data || new CategoryClass(),
+      onSubmit: SubmitForm,
+      validationSchema,
+    });
+
+  function SubmitForm(data: CategoryClass) {
+    onSubmit(data);
+    resetForm();
+  }
 
   return (
     <form id={id} onSubmit={handleSubmit}>
@@ -65,6 +70,7 @@ export function TypeForm({
         <Label>Nome da categoria</Label>
         <Input
           type="text"
+          placeholder="Digite um nome para categoria"
           {...getFieldProps("name_type")}
           disabled={disabled}
         />

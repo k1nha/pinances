@@ -1,2 +1,2 @@
-export * from "./transactiontype";
+export * from "./category";
 export * from "./transaction";

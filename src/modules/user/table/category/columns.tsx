@@ -4,7 +4,7 @@ import { SolarTrashBin2Linear } from "@/shared/icons";
 import { capitalizeFirstLetter } from "@/utils";
 import { ColumnDef } from "@tanstack/react-table";
 
-type TransactionType = {
+type CategoryTransaction = {
   id: string;
   name_type: string;
   finance_type: string;
@@ -12,7 +12,7 @@ type TransactionType = {
   updated_at: Date;
 };
 
-export const transactionsTypeColumns: ColumnDef<TransactionType>[] = [
+export const CategoryTransactionColumns: ColumnDef<CategoryTransaction>[] = [
   {
     accessorKey: "name_type",
     header: "Nome da categoria",
@@ -59,7 +59,7 @@ export const transactionsTypeColumns: ColumnDef<TransactionType>[] = [
       // eslint-disable-next-line react-hooks/rules-of-hooks
       const { mutate } = useDeleteItemTable(
         row.original.id,
-        ["list-type"],
+        ["transactions-category"],
         "transactiontype"
       );
 

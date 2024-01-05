@@ -1,4 +1,4 @@
-export * from "./type";
+export * from "./category.module";
 export * from "./transaction";
-export * from "./type.form";
+export * from "./category.form";
 export * from "./transaction.form";

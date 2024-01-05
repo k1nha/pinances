@@ -11,7 +11,7 @@ export async function getAllInputs() {
 
 export function getAllOutputs() {}
 
-export const getAllTypes = async () => {
+export const getAllCategories = async () => {
   const session = await getSession();
 
   const res = await HTTP.get(`/v1/transactiontype/${session?.user.user_id}`);
@@ -20,7 +20,7 @@ export const getAllTypes = async () => {
 };
 
 // TODO: Type body
-export const createTypeTransaction = async (body: any) => {
+export const createTransactionCategory = async (body: any) => {
   const session = await getSession();
 
   const res = await HTTP.post("/v1/transactiontype", {

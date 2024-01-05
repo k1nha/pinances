@@ -5,7 +5,7 @@ import Link from "next/link";
 export function Navbar() {
   return (
     <div className="fixed bottom-0 left-0 z-50 w-full h-16 bg-white md:hidden  border-t border-gray-200 dark:bg-gray-700 dark:border-gray-600">
-      <div className="grid h-full max-w-lg grid-cols-4 mx-auto">
+      <div className="grid h-full max-w-lg grid-cols-5 gap-3 mx-auto">
         {routes.map(({ link, name, icon }, i) => (
           <Link
             href={link}

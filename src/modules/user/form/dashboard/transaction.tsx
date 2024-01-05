@@ -1,11 +1,11 @@
 "use client";
-import { ListType } from "@/app/dashboard/type/page";
 import { Button } from "@/components/ui";
-import { getAllTypes } from "@/services";
+import { getAllCategories } from "@/services";
 import { useMutation, useQuery } from "@tanstack/react-query";
 import * as yup from "yup";
 import { TransactionClass, TransactionForm } from ".";
 import { createFinance } from "@/services/query/transactions";
+import { Categories } from "@/app/dashboard/category/page";
 
 const transactionSchema = yup.object({
   transaction_type: yup.string(),
@@ -15,9 +15,9 @@ const transactionSchema = yup.object({
 });
 
 export function TransactionModule() {
-  const { data } = useQuery<ListType[]>({
-    queryKey: ["list-type"],
-    queryFn: getAllTypes,
+  const { data } = useQuery<Categories[]>({
+    queryKey: ["transactions-category"],
+    queryFn: getAllCategories,
   });
 
   const { mutate: createTransaction } = useMutation({

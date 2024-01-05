@@ -19,7 +19,7 @@ export async function SideBar() {
   }
 
   return (
-    <aside className="h-screen md:overflow-hidden overflow-auto md:hover:overflow-auto shadow-[#3e3e3e] shadow-sm">
+    <aside className="min-h-screen md:overflow-hidden overflow-auto md:hover:overflow-auto shadow-[#3e3e3e] shadow-sm">
       <div className="w-56 p-6 h-full hidden md:flex flex-col ">
         <div className="flex px-1 items-center gap-2">
           <LogoIcon fill="#000" />
