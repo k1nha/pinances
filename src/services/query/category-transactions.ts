@@ -4,14 +4,14 @@ import { HTTP } from "..";
 export async function getAllInputs() {
   const response = await HTTP.get(`v1/transactiontype/input/`);
 
-  const data = response.data();
+  const data = response.data;
 
   return data;
 }
 
 export function getAllOutputs() {}
 
-export const getAllCategories = async () => {
+export const getAllCategoriesFetch = async () => {
   const session = await getSession();
 
   const res = await HTTP.get(`/v1/transactiontype/${session?.user.user_id}`);

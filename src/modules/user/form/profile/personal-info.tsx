@@ -1,22 +1,45 @@
 "use client";
-import { Button } from "@/components/ui";
+import { Button, useToast } from "@/components/ui";
 import { PersonalInfoForm } from ".";
 import { useState } from "react";
 import { LoadingSpinner } from "@/shared/icons";
 import * as yup from "yup";
 import { PersonalInfo as PersonalInfoClass } from "./personal-info.form";
+import { useMutation } from "@tanstack/react-query";
 
 const personalInfoSchema = yup.object({
-  name: yup.string(),
-  email: yup.string(),
-  contact: yup.string(),
+  name: yup.string().required(),
+  email: yup.string().required(),
+  contact: yup.string().required(),
 });
 
-export function PersonalInfo() {
+export function PersonalInfoModule() {
+  const { toast } = useToast();
   const [isLoading, setIsLoading] = useState(false);
+  const { mutate: personalInfoMutation } = useMutation({
+    mutationFn: async (data: PersonalInfoClass) => {
+      setIsLoading((prev) => !prev);
+      // return await createTransactionCategory(data);
+    },
+    onSuccess: () => {
+      toast({
+        title: "Informações pessoais alterada",
+        description: "Suas informações foram atualizadas com sucesso",
+      });
+      setIsLoading((prev) => !prev);
+    },
+    onError: () => {
+      toast({
+        title: "Erro",
+        description: "Algo aconteceu",
+        variant: "destructive",
+      });
+    },
+  });
 
   function handleSubmitPersonalInfoForm(data: PersonalInfoClass) {
     //
+    personalInfoMutation(data)
   }
 
   return (

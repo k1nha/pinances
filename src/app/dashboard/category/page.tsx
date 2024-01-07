@@ -2,7 +2,7 @@
 import { TypeTransaction } from "@/components/transactions";
 import { Card } from "@/components/ui";
 import { CategoryModule, CategoryTable } from "@/modules/user";
-import { getAllCategories } from "@/services";
+import { getAllCategoriesFetch } from "@/services";
 import { LoadingSpinner } from "@/shared/icons";
 import { useQuery } from "@tanstack/react-query";
 
@@ -19,7 +19,7 @@ export type Categories = {
 export default function CategoryPage() {
   const { data, isLoading } = useQuery<Categories[]>({
     queryKey: ["transactions-category"],
-    queryFn: getAllCategories,
+    queryFn: getAllCategoriesFetch,
   });
 
   return (

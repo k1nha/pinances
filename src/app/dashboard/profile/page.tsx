@@ -1,6 +1,6 @@
 "use client";
 import { Card } from "@/components/ui";
-import { PersonalInfo } from "@/modules/user";
+import { PersonalInfoModule } from "@/modules/user";
 
 export default function ProfilePage() {
   return (
@@ -16,7 +16,7 @@ export default function ProfilePage() {
             Edite suas informações pessoais
           </p>
 
-          <PersonalInfo />
+          <PersonalInfoModule />
         </Card>
 
         <Card className="p-6">

@@ -1,6 +1,6 @@
 "use client";
 import { Button } from "@/components/ui";
-import { getAllCategories } from "@/services";
+import { getAllCategoriesFetch } from "@/services";
 import { useMutation, useQuery } from "@tanstack/react-query";
 import * as yup from "yup";
 import { TransactionClass, TransactionForm } from ".";
@@ -17,7 +17,7 @@ const transactionSchema = yup.object({
 export function TransactionModule() {
   const { data } = useQuery<Categories[]>({
     queryKey: ["transactions-category"],
-    queryFn: getAllCategories,
+    queryFn: getAllCategoriesFetch,
   });
 
   const { mutate: createTransaction } = useMutation({
